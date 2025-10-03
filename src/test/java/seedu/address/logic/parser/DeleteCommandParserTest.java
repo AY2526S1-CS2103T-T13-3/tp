@@ -1,32 +1,66 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PLAYER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PLAYER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PLAYER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.person.Name;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the DeleteCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the DeleteCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
+ * outside the DeleteCommand code.
  */
 public class DeleteCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private final DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        // Valid player name
+        Name personName = new Name(VALID_NAME_AMY);
+        assertParseSuccess(parser, PLAYER_DESC_AMY, new DeleteCommand(personName));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_validArgsWithExtraWhitespace_returnsDeleteCommand() {
+        // Valid player name with extra whitespace
+        Name personName = new Name(VALID_NAME_AMY);
+        assertParseSuccess(parser, PLAYER_DESC_AMY + "  ", new DeleteCommand(personName));
     }
+
+    @Test
+    public void parse_missingPrefix_throwsParseException() {
+        // Missing pl/ prefix
+        assertParseFailure(parser, VALID_NAME_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingPlayerName_throwsParseException() {
+        // Missing player name after prefix
+        assertParseFailure(parser, " " + PREFIX_PLAYER, Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidPlayerName_throwsParseException() {
+        // Invalid name with special characters
+        assertParseFailure(parser, INVALID_PLAYER_DESC, Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_duplicatePrefix_throwsParseException() {
+        // Duplicate pl/ prefix
+        assertParseFailure(parser, PLAYER_DESC_AMY + PLAYER_DESC_BOB,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PLAYER));
+    }
+
 }

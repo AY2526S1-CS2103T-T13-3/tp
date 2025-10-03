@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.team.Team;
@@ -74,6 +75,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public Person getPersonByName(Name name) {
+        requireNonNull(name);
+        return persons.getPersonByName(name);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -132,9 +138,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("persons", persons)
-            .add("teams", teams)
-            .toString();
+                .add("persons", persons)
+                .add("teams", teams)
+                .toString();
     }
 
     @Override
@@ -160,7 +166,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons)
-            && teams.equals(otherAddressBook.teams);
+                && teams.equals(otherAddressBook.teams);
     }
 
     @Override

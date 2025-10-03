@@ -97,6 +97,16 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public Person getPersonByName(Name name) {
+        requireNonNull(name);
+        for (Person person : internalList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
