@@ -18,3 +18,12 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.team-tag {
+  -fx-background-color: #1976D2;
+  -fx-text-fill: white;
+  -fx-padding: 2 3 2 3;
+  -fx-background-radius: 8;
+  -fx-margin-bottom: 8px;
+  -fx-font-size: 11px;
+}

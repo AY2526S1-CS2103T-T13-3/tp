@@ -26,6 +26,13 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <FlowPane fx:id="teamContainer" hgap="4" vgap="4" prefWrapLength="200"
+          GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"
+          HBox.hgrow="SOMETIMES">
+            <HBox.margin>
+                <Insets top="0" right="0" bottom="0" left="4"/>
+            </HBox.margin>
+        </FlowPane>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
