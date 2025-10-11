@@ -1,7 +1,7 @@
 package seedu.address.model.person.exceptions;
 
 /**
- * Signals that the operation will result in trying to makeCaptain on an already existing captain
+ * Signals that the operation will result in trying to strip captaincy from someone who is already not a captain.
  */
 public class AlreadyNotCaptainException extends RuntimeException {
     public AlreadyNotCaptainException() {

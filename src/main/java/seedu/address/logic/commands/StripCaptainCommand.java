@@ -22,7 +22,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * </pre>
  */
 public class StripCaptainCommand extends Command {
-    public static final String COMMAND_WORD = "stripCaptain";
+    public static final String COMMAND_WORD = "stripcaptain";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the person "
             + "as no longer captain.\n"
             + "Parameters: " + PREFIX_PLAYER + "PLAYER "
@@ -57,7 +57,7 @@ public class StripCaptainCommand extends Command {
         }
 
         if (!targetPerson.isCaptain()) {
-            throw new CommandException(MESSAGE_NOT_CAPTAIN);
+            throw new CommandException(String.format(MESSAGE_NOT_CAPTAIN, targetPerson.getName()));
         }
 
         model.stripCaptain(targetPerson);

@@ -13,7 +13,7 @@ import seedu.address.model.Model;
  * the successful operation.
  */
 public class FilterCaptainCommand extends Command {
-    public static final String COMMAND_WORD = "filterCaptains";
+    public static final String COMMAND_WORD = "filtercaptains";
     public static final String MESSAGE_SUCCESS = "Listed all captains";
 
     /**

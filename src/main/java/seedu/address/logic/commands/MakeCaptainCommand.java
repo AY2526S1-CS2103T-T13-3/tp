@@ -22,7 +22,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * </pre>
  */
 public class MakeCaptainCommand extends Command {
-    public static final String COMMAND_WORD = "makeCaptain";
+    public static final String COMMAND_WORD = "makecaptain";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the person "
             + "as captain.\n"
             + "Parameters: " + PREFIX_PLAYER + "PLAYER "

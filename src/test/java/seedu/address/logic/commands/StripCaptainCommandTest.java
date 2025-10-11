@@ -85,7 +85,7 @@ public class StripCaptainCommandTest {
         try {
             command.execute(modelStub);
         } catch (CommandException e) {
-            assertEquals(StripCaptainCommand.MESSAGE_NOT_CAPTAIN, e.getMessage());
+            assertEquals(String.format(StripCaptainCommand.MESSAGE_NOT_CAPTAIN, person.getName()), e.getMessage());
             return;
         } catch (Exception e) {
             throw new AssertionError("Expected CommandException for not-a-captain.");

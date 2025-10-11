@@ -23,6 +23,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCaptainCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -130,7 +131,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filterCaptains() throws Exception {
-        assertTrue(parser.parseCommand("filterCaptains") instanceof seedu.address.logic.commands.FilterCaptainCommand);
+        assertTrue(parser.parseCommand(FilterCaptainCommand.COMMAND_WORD) instanceof FilterCaptainCommand);
     }
 
     @Test

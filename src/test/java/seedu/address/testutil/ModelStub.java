@@ -10,6 +10,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.AlreadyCaptainException;
+import seedu.address.model.person.exceptions.AlreadyNotCaptainException;
 import seedu.address.model.position.Position;
 import seedu.address.model.team.Team;
 
@@ -103,7 +105,7 @@ public class ModelStub implements Model {
     @Override
     public void makeCaptain(Person person) {
         if (person.isCaptain()) {
-            throw new seedu.address.model.person.exceptions.AlreadyCaptainException();
+            throw new AlreadyCaptainException();
         }
         person.makeCaptain();
     }
@@ -111,7 +113,7 @@ public class ModelStub implements Model {
     @Override
     public void stripCaptain(Person person) {
         if (!person.isCaptain()) {
-            throw new seedu.address.model.person.exceptions.AlreadyNotCaptainException();
+            throw new AlreadyNotCaptainException();
         }
         person.stripCaptain();
     }

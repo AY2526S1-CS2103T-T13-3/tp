@@ -48,6 +48,23 @@ public class Person {
     }
 
     /**
+     * Creates a Person object with specified captain status and with a team assigned.
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Team team,
+                  Position position, Set<Tag> tags, boolean isCaptain) {
+        requireAllNonNull(name, phone, email, address, team, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.team = team;
+        this.position = position;
+        this.tags.addAll(tags);
+        this.isCaptain = isCaptain;
+    }
+
+    /**
      * Backwards-compatible constructor defaulting position to NONE for legacy call sites.
      */
     public Person(Name name, Phone phone, Email email, Address address, Team team, Set<Tag> tags) {
