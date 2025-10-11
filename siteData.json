@@ -107,15 +107,15 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ab-3-user-guide": "AB-3 User Guide",
+        "playbook-user-guide": "PlayBook User Guide",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
-        "adding-a-person-add": "Adding a person: add",
-        "listing-all-persons-list": "Listing all persons : list",
-        "editing-a-person-edit": "Editing a person : edit",
-        "locating-persons-by-name-find": "Locating persons by name: find",
-        "deleting-a-person-delete": "Deleting a person : delete",
+        "adding-a-player-add": "Adding a player: add",
+        "listing-all-players-list": "Listing all players : list",
+        "editing-a-player-edit": "Editing a player : edit",
+        "locating-players-by-name-find": "Locating players by name: find",
+        "deleting-a-player-delete": "Deleting a player : delete",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
@@ -131,7 +131,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "playbook": "PlayBook"
       },
       "headingKeywords": {}
     },
