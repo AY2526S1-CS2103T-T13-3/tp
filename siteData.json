@@ -118,6 +118,7 @@
         "editing-a-player-edit": "Editing a player : edit",
         "locating-players-by-name-find": "Locating players by name: find",
         "deleting-a-player-delete": "Deleting a player : delete",
+        "deleting-a-team-deleteteam": "Deleting a team : deleteteam",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
