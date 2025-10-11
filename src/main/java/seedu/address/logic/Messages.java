@@ -22,6 +22,9 @@ public class Messages {
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person '%1$s' does not exist.";
     public static final String MESSAGE_INVALID_TEAM = "No such team in the address book.";
     public static final String MESSAGE_NO_PLAYERS_IN_TEAM = "No players assigned to team \"%1$s\".";
+    public static final String MESSAGE_NO_PLAYERS_WITH_INJURY = "No players with injury \"%1$s\".";
+    public static final String MESSAGE_NO_MATCHING_TEAM_OR_INJURY =
+            "No players matching team \"%1$s\" and injury \"%2$s\".";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

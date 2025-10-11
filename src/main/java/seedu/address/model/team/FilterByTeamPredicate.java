@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s team name matches the given team name (case-insensitive).
  */
 public class FilterByTeamPredicate implements Predicate<Person> {
+    public static final FilterByTeamPredicate ALWAYS_TRUE = new FilterByTeamPredicate("");
     private final String teamName;
 
     public FilterByTeamPredicate(String teamName) {
@@ -18,6 +19,9 @@ public class FilterByTeamPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (teamName.isEmpty()) {
+            return true;
+        }
         return StringUtil.containsWordIgnoreCase(person.getTeam().getName(), teamName);
     }
 

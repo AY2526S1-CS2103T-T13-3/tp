@@ -61,4 +61,8 @@ public class Injury {
     public int hashCode() {
         return this.injuryName.toLowerCase().hashCode();
     }
+
+    public String getInjuryName() {
+        return injuryName;
+    }
 }

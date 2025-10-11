@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTeams.U12;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.FilterByInjuryPredicate;
 import seedu.address.model.team.FilterByTeamPredicate;
 import seedu.address.model.team.Team;
 import seedu.address.testutil.TeamBuilder;
@@ -36,7 +39,8 @@ public class FilterCommandTest {
     public void execute_validTeamName_filtersCorrectly() {
         // U12 has persons in typical data
         FilterByTeamPredicate predicate = new FilterByTeamPredicate(U12.getName());
-        FilterCommand command = new FilterCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(U12.getName()), Optional.empty());
         expectedModel.updateFilteredPersonList(predicate);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
                 expectedModel.getFilteredPersonList().size());
@@ -46,7 +50,8 @@ public class FilterCommandTest {
     @Test
     public void execute_nonexistentTeam_throwsCommandException() {
         FilterByTeamPredicate predicate = new FilterByTeamPredicate("NoSuchTeam");
-        FilterCommand command = new FilterCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(predicate.getTeamName()), Optional.empty());
         assertCommandFailure(command, model, MESSAGE_INVALID_TEAM);
     }
 
@@ -59,8 +64,9 @@ public class FilterCommandTest {
         model.addTeam(emptyTeam);
 
         // Construct and execute the filter command
-        FilterCommand command = new FilterCommand(
-                new FilterByTeamPredicate(emptyTeam.getName()));
+        FilterCommand command =
+            new FilterCommand(new FilterByTeamPredicate(emptyTeam.getName()), FilterByInjuryPredicate.ALWAYS_TRUE,
+                    Optional.of(emptyTeam.getName()), Optional.empty());
 
         assertCommandFailure(command, model,
                 String.format(Messages.MESSAGE_NO_PLAYERS_IN_TEAM, emptyTeam.getName()));
@@ -71,9 +77,12 @@ public class FilterCommandTest {
         FilterByTeamPredicate p1 = new FilterByTeamPredicate("A");
         FilterByTeamPredicate p2 = new FilterByTeamPredicate("B");
 
-        FilterCommand cmd1 = new FilterCommand(p1);
-        FilterCommand cmd1Copy = new FilterCommand(p1);
-        FilterCommand cmd2 = new FilterCommand(p2);
+        FilterCommand cmd1 = new FilterCommand(p1, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(p1.getTeamName()), Optional.empty());
+        FilterCommand cmd1Copy = new FilterCommand(p1, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(p1.getTeamName()), Optional.empty());
+        FilterCommand cmd2 = new FilterCommand(p2, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(p2.getTeamName()), Optional.empty());
 
         // same object
         assertTrue(cmd1.equals(cmd1));
@@ -90,8 +99,9 @@ public class FilterCommandTest {
     @Test
     public void toString_containsPredicate() {
         FilterByTeamPredicate predicate = new FilterByTeamPredicate(U12.getName());
-        FilterCommand command = new FilterCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate, FilterByInjuryPredicate.ALWAYS_TRUE,
+                Optional.of(predicate.getTeamName()), Optional.empty());
         String str = command.toString();
-        assertTrue(str.contains("predicate=" + predicate.toString()));
+        assertTrue(str.contains("teamPredicate=" + predicate.toString()));
     }
 }

@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
+import seedu.address.model.person.FilterByInjuryPredicate;
 import seedu.address.model.team.FilterByTeamPredicate;
 import seedu.address.model.team.Team;
 
@@ -20,7 +23,9 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         String input = " " + PREFIX_TEAM + "U12";
         FilterByTeamPredicate expectedPredicate = new FilterByTeamPredicate("U12");
-        FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
+        FilterCommand expectedCommand =
+                new FilterCommand(expectedPredicate, FilterByInjuryPredicate.ALWAYS_TRUE,
+                        Optional.of("U12"), Optional.empty());
         assertParseSuccess(parser, input, expectedCommand);
     }
 

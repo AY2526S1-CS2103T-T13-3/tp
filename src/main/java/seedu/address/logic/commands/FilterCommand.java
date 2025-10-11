@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.FilterByInjuryPredicate;
 import seedu.address.model.team.FilterByTeamPredicate;
 import seedu.address.model.team.Team;
 
@@ -15,57 +19,81 @@ import seedu.address.model.team.Team;
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " tm/TEAM_NAME : Filters players by the given team.";
+            + " [tm/TEAM_NAME] [i/INJURY] : Filters players by team and/or injury.";
 
-    private final FilterByTeamPredicate predicate;
+    private final FilterByTeamPredicate teamPredicate;
+    private final FilterByInjuryPredicate injuryPredicate;
 
-    public FilterCommand(FilterByTeamPredicate predicate) {
-        this.predicate = predicate;
+    private final Optional<String> teamArg;
+    private final Optional<String> injuryArg;
+
+    /**
+     * Creates a FilterCommand to filter the persons with the specified {@code teamPredicate}
+     * and {@code injuryPredicate}
+     */
+    public FilterCommand(FilterByTeamPredicate teamPred, FilterByInjuryPredicate injuryPred,
+            Optional<String> teamArg, Optional<String> injuryArg) {
+        this.teamPredicate = requireNonNull(teamPred);
+        this.injuryPredicate = requireNonNull(injuryPred);
+        this.teamArg = requireNonNull(teamArg);
+        this.injuryArg = requireNonNull(injuryArg);
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        String teamName = predicate.getTeamName();
+        Optional<String> tArg = teamArg;
+        Optional<String> iArg = injuryArg;
 
-        Team dummy = new Team(teamName);
-        if (!model.hasTeam(dummy)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TEAM);
+        if (tArg.isPresent()) {
+            Team check = new Team(tArg.get());
+            if (!model.hasTeam(check)) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TEAM);
+            }
         }
 
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredPersonList(person ->
+            teamPredicate.test(person) && injuryPredicate.test(person));
 
-        if (model.getFilteredPersonList().isEmpty()) {
-            throw new CommandException(
-                String.format(Messages.MESSAGE_NO_PLAYERS_IN_TEAM, predicate.getTeamName()));
+        int size = model.getFilteredPersonList().size();
+        if (size == 0) {
+            if (tArg.isPresent() && iArg.isPresent()) {
+                throw new CommandException(
+                    String.format(Messages.MESSAGE_NO_MATCHING_TEAM_OR_INJURY, tArg.get(), iArg.get()));
+            } else if (tArg.isPresent()) {
+                throw new CommandException(
+                    String.format(Messages.MESSAGE_NO_PLAYERS_IN_TEAM, tArg.get()));
+            } else {
+                throw new CommandException(
+                    String.format(Messages.MESSAGE_NO_PLAYERS_WITH_INJURY, iArg.get()));
+            }
         }
 
-        return CommandResult.showPersonCommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                model.getFilteredPersonList().size()));
+        return new CommandResult(
+            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, size));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof FilterCommand)) {
             return false;
         }
-
-        FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicate.equals(otherFilterCommand.predicate);
+        FilterCommand o = (FilterCommand) other;
+        return Objects.equals(teamPredicate, o.teamPredicate)
+            && Objects.equals(injuryPredicate, o.injuryPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("teamPredicate", teamPredicate)
+                .add("injuryPredicate", injuryPredicate)
                 .toString();
     }
 }
