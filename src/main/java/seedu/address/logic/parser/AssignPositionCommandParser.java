@@ -1,5 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,22 +14,22 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class AssignPositionCommandParser implements Parser<AssignPositionCommand> {
     private static final Pattern ARG_PATTERN =
-            Pattern.compile("(?i).*\\bp/(?<player>[^\\s].*?)\\s+ps/(?<position>\\S+)\\s*");
+            Pattern.compile("(?i).*\\bpl/(?<player>[^\\s].*?)\\s+ps/(?<position>\\S+)\\s*");
 
     @Override
     public AssignPositionCommand parse(String args) throws ParseException {
-        // Validates presence of both p/ and ps/ flags and extracts values
+        // Validates presence of both pl/ and ps/ flags and extracts values
         if (args == null || args.trim().isEmpty()) {
             throw new ParseException(AssignPositionCommand.MESSAGE_INVALID_FORMAT);
         }
         Matcher m = ARG_PATTERN.matcher(args.trim());
         if (!m.matches()) {
-            boolean hasP = args.contains("p/");
-            boolean hasPs = args.contains("ps/");
-            if (!hasP) {
+            boolean hasPlayer = args.contains(PREFIX_PLAYER.getPrefix());
+            boolean hasPosition = args.contains(PREFIX_POSITION.getPrefix());
+            if (!hasPlayer) {
                 throw new ParseException(AssignPositionCommand.MESSAGE_MISSING_PLAYER_FLAG);
             }
-            if (!hasPs) {
+            if (!hasPosition) {
                 throw new ParseException(AssignPositionCommand.MESSAGE_MISSING_POSITION_FLAG);
             }
             throw new ParseException(AssignPositionCommand.MESSAGE_INVALID_FORMAT);

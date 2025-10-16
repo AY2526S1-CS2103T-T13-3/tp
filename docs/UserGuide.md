@@ -67,7 +67,7 @@ PlayBook (PB) is a **desktop app for semi-professional youth football coaches to
 
    * `newposition ps/LW` : Creates a new position named `LW` (Left Wing) in the PlayBook.
 
-   * `assignposition p/John Doe ps/LW` : Assigns the position `LW` to `John Doe` in the PlayBook.
+   * `assignposition pl/John Doe ps/LW` : Assigns the position `LW` to `John Doe` in the PlayBook.
 
    * `assigninjury pl/John Doe i/ACL` : Assigns an injury status of `ACL` to `John Doe` from the PlayBook. 
 
@@ -233,7 +233,7 @@ Examples:
 
 Assigns an existing position to an existing player in the PlayBook.
 
-Format: `assignposition p/PLAYER_NAME ps/POSITION_NAME`
+Format: `assignposition pl/PLAYER_NAME ps/POSITION_NAME`
 
 * Assigns the position with the specified `POSITION_NAME` to the player with the specified `PLAYER_NAME`.
 * `PLAYER_NAME` must be an existing player in the PlayBook.
@@ -246,8 +246,8 @@ Format: `assignposition p/PLAYER_NAME ps/POSITION_NAME`
 * The player must not already be assigned to the same position.
 
 Examples:
-* `assignposition p/John Doe ps/LW` assigns the position `LW` to the player `John Doe`.
-* `assignposition p/Musiala ps/ST` assigns the position `ST` to the player `Musiala`.
+* `assignposition pl/John Doe ps/LW` assigns the position `LW` to the player `John Doe`.
+* `assignposition pl/Musiala ps/ST` assigns the position `ST` to the player `Musiala`.
 
 ### Listing all players: `list`
 
@@ -266,6 +266,12 @@ Format: `listteam`
 Shows a list of all positions in the PlayBook.
 
 Format: `listposition`
+
+### Listing all injured players: `listinjured`
+
+Shows a list of the injured players in the PlayBook.
+
+Format: `listinjured`
 
 ### Editing a player: `edit`
 
@@ -444,7 +450,7 @@ _Details coming soon ..._
 | **Assign Injury to Player** | `assigninjury pl/PLAYER_NAME i/INJURY` <br> e.g., `assigninjury pl/John Doe i/ACL`                                                                                                                    |
 | **Unassign Injury from Player** | `unassigninjury pl/PLAYER_NAME` <br> e.g., `unassigninjury pl/John Doe`                                                                                                                               |
 | **Create New Position**     | `newposition ps/POSITION_NAME` <br> e.g., `newposition ps/LW`                                                                                                                                         |
-| **Assign Position to Player** | `assignposition p/PLAYER_NAME ps/POSITION_NAME` <br> e.g., `assignposition p/John Doe ps/LW`                                                                                                          |
+| **Assign Position to Player** | `assignposition pl/PLAYER_NAME ps/POSITION_NAME` <br> e.g., `assignposition pl/John Doe ps/LW`                                                                                                          |
 | **Clear**                   | `clear`                                                                                                                                                                                               |
 | **Delete Player**           | `delete pl/PLAYER`<br> e.g., `delete pl/James Ho`                                                                                                                                                     |
 | **Delete Team**             | `deleteteam tm/TEAM`<br> e.g., `deleteteam tm/u16`                                                                                                                                                    |
@@ -455,4 +461,5 @@ _Details coming soon ..._
 | **List**                    | `list`                                                                                                                                                                                                |
 | **List Teams**              | `listteam`                                                                                                                                                                                           |
 | **List Positions**              | `listposition`                                                                                                                                                                                           |
+| **List Injured Players**              | `listinjured`                                                                                                                                                                                           |
 | **Help**                    | `help`                                                                                                                                                                                                |

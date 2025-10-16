@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.FilterInjuredPredicate;
 import seedu.address.model.person.Injury;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -23,6 +24,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
+
+    /** Shows only persons whose injury is non-default. */
+    Predicate<Person> PREDICATE_SHOW_ALL_INJURED = new FilterInjuredPredicate();
 
     Predicate<Person> PREDICATE_SHOW_CAPTAINS = Person::isCaptain;
 

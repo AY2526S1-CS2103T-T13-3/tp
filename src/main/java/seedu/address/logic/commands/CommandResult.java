@@ -67,12 +67,16 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and display persons in the UI.
+     * and displays persons in the UI.
      */
     public static CommandResult showPersonCommandResult(String feedbackToUser) {
         return new CommandResult(feedbackToUser, false, false, false, true, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and displays positions in the UI.
+     */
     public static CommandResult showPositionCommandResult(String feedbackToUser) {
         return new CommandResult(feedbackToUser, false, false, false, false, true);
     }

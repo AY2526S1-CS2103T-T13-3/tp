@@ -27,6 +27,7 @@ public class NewPositionCommand extends Command {
      * @param rawPositionName raw position name string to create.
      */
     public NewPositionCommand(String rawPositionName) {
+        requireNonNull(rawPositionName);
         this.rawPositionName = rawPositionName;
     }
 
@@ -46,6 +47,21 @@ public class NewPositionCommand extends Command {
         }
         model.addPosition(position);
         return new CommandResult(String.format(MESSAGE_SUCCESS, normalized));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof NewPositionCommand)) {
+            return false;
+        }
+
+        NewPositionCommand otherCommand = (NewPositionCommand) other;
+        return rawPositionName.equals(otherCommand.rawPositionName);
     }
 }
 

@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +22,7 @@ public class DeletePositionCommandParser implements Parser<DeletePositionCommand
         }
         Matcher m = ARG_PATTERN.matcher(args);
         if (!m.matches()) {
-            if (!args.contains("ps/")) {
+            if (!args.contains(PREFIX_POSITION.getPrefix())) {
                 throw new ParseException(DeletePositionCommand.MESSAGE_MISSING_FLAG);
             }
             throw new ParseException(DeletePositionCommand.MESSAGE_INVALID_FORMAT);

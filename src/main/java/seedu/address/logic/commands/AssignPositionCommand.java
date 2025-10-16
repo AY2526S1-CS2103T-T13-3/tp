@@ -11,7 +11,7 @@ import seedu.address.model.position.Position;
 /**
  * Assigns an existing {@code Position} to an existing {@code Person}.
  * <p>
- * Usage: {@code assignposition p/<player> ps/<position>}
+ * Usage: {@code assignposition pl/<player> ps/<position>}
  */
 public class AssignPositionCommand extends Command {
     public static final String COMMAND_WORD = "assignposition";
@@ -19,10 +19,10 @@ public class AssignPositionCommand extends Command {
     public static final String MESSAGE_PLAYER_NOT_FOUND = "%s doesn't exist";
     public static final String MESSAGE_POSITION_NOT_FOUND = "%s doesn't exist";
     public static final String MESSAGE_DUPLICATE_ASSIGN = "%s is already assigned position %s!";
-    public static final String MESSAGE_MISSING_PLAYER_FLAG = "Missing 'p/' flag for assignposition command";
+    public static final String MESSAGE_MISSING_PLAYER_FLAG = "Missing 'pl/' flag for assignposition command";
     public static final String MESSAGE_MISSING_POSITION_FLAG = "Missing 'ps/' flag for assignposition command";
     public static final String MESSAGE_INVALID_FORMAT =
-            "Invalid command format. Please ensure correct format: assignposition p/<player> ps/<position>";
+            "Invalid command format. Please ensure correct format: assignposition pl/<player> ps/<position>";
 
     private final String rawPlayerName;
     private final String rawPositionName;
@@ -34,6 +34,8 @@ public class AssignPositionCommand extends Command {
      * @param rawPositionName raw position name string (may require trimming and case-insensitive matching).
      */
     public AssignPositionCommand(String rawPlayerName, String rawPositionName) {
+        requireNonNull(rawPlayerName);
+        requireNonNull(rawPositionName);
         this.rawPlayerName = rawPlayerName;
         this.rawPositionName = rawPositionName;
     }
@@ -79,6 +81,22 @@ public class AssignPositionCommand extends Command {
         );
         model.setPerson(person, edited);
         return new CommandResult(String.format(MESSAGE_SUCCESS, playerNameStr, position.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AssignPositionCommand)) {
+            return false;
+        }
+
+        AssignPositionCommand otherCommand = (AssignPositionCommand) other;
+        return rawPlayerName.equals(otherCommand.rawPlayerName)
+                && rawPositionName.equals(otherCommand.rawPositionName);
     }
 }
 

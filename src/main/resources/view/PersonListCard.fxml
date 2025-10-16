@@ -26,7 +26,12 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-        <FlowPane fx:id="teamPositionContainer" hgap="4">
+        <FlowPane fx:id="teamContainer" hgap="4" vgap="4">
+            <HBox.margin>
+                <Insets top="0" right="0" bottom="0" left="4"/>
+            </HBox.margin>
+        </FlowPane>
+        <FlowPane fx:id="positionContainer" hgap="4" vgap="4">
             <HBox.margin>
                 <Insets top="0" right="0" bottom="0" left="4"/>
             </HBox.margin>

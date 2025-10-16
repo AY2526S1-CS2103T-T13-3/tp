@@ -24,8 +24,8 @@ public class ListPositionCommandTest {
     }
 
     @Test
-    public void execute_emptyAddressBook_showsEmptyTeamList() {
-        // Create a model with empty address book (stub)
+    public void execute_emptyPlayBook_showsEmptyTeamList() {
+        // Create a model with an empty PlayBook
         Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
         Model expectedEmptyModel = new ModelManager(new AddressBook(), new UserPrefs());
 
