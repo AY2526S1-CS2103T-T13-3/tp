@@ -6,10 +6,14 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
+AddressBook *-right-> "1" UniqueTeamList
+AddressBook *-right-> "1" UniquePositionList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
+UniqueTeamList -right-> "*" Team
+UniquePositionList -right-> "*" Position
 UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
@@ -18,4 +22,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Team
+Person *--> Position
+Person *--> Injury
+
+note right of Person
+  isCaptain: boolean
+end note
 @enduml
