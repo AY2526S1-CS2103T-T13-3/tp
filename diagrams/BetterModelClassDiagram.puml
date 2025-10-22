@@ -3,30 +3,64 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam linetype polyline
+left to right direction
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-AddressBook *-right-> "1" UniqueTeamList
-AddressBook *-right-> "1" UniquePositionList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+Package Model as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class AddressBook
+Class ModelManager
+Class UserPrefs
+}
 
-UniqueTagList -right-> "*" Tag
-UniqueTeamList -right-> "*" Team
-UniquePositionList -right-> "*" Position
-UniquePersonList -right-> Person
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
 
-Person -up-> "*" Tag
+package "AddressBook Contents" as ABC <<Rectangle>> {
+  together {
+    class Person
+    class Tag
+    class Team
+    class Position
+    class Injury
+  }
+  together {
+    class Name
+    class Phone
+    class Email
+    class Address
+  }
+}
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Team
-Person *--> Position
-Person *--> Injury
+Person -right-> "*" Tag
 
-note right of Person
-  isCaptain: boolean
-end note
+Person *-down-> Name
+Person *-down-> Phone
+Person *-down-> Email
+Person *-down-> Address
+Person -right-> Team
+Person -right-> Position
+Person -right-> "*" Injury
+
+ModelManager --> "~* filtered" Person
+
+Class "Layout Guide" as ColGuide #FFFFFF
+ColGuide -[hidden]down- Person
+ColGuide -[hidden]right- Person
+Person -[hidden]right- Tag
+Tag -[hidden]down- Team
+Team -[hidden]down- Position
+Position -[hidden]down- Injury
+Person -[hidden]down- Name
+Name -[hidden]down- Phone
+Phone -[hidden]down- Email
+Email -[hidden]down- Address
+
 @enduml
