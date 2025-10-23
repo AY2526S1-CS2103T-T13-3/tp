@@ -118,7 +118,7 @@
         "assign-player-to-team-assignteam": "Assign player to team: assignteam",
         "assign-injury-to-player-assigninjury": "Assign injury to player: assigninjury",
         "unassign-injury-from-player-unassigninjury": "Unassign injury from player: unassigninjury",
-        "creating-a-new-position-newposition": "Creating a new position: newposition",
+        "creating-a-new-position-addposition": "Creating a new position: addposition",
         "assigning-a-position-to-player-assignposition": "Assigning a position to player: assignposition",
         "assigning-player-as-captain-makecaptain": "Assigning player as captain: makecaptain",
         "unassigning-player-as-captain-stripcaptain": "Unassigning player as captain: stripcaptain",
