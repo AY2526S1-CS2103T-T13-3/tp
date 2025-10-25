@@ -19,36 +19,46 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-
-Class I #FFFFFF
+Class UniqueTagList
+Class UniqueTeamList
+Class UniquePositionList
+Class Injury
+Class Team
+Class Position
 }
-
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 
-ModelManager .up.|> Model
+ModelManager ..|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+ModelManager -down-> AddressBook
+ModelManager -up->   UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *-right-> UniquePersonList
+AddressBook *-down-> UniqueTagList
+AddressBook *-left-> UniqueTeamList
+AddressBook *-up-> UniquePositionList
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+UniquePersonList -right-> Person
+UniqueTagList -down-> Tag
+UniqueTeamList -left-> Team
+UniquePositionList -up-> Position
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+Person -down-> Name
+Person -right-> Phone
+Person -up->   Email
+Person -left-> Address
+Person -down->  Team
+Person -right-> Position
+Person -up->    Injury
+
+
+note right of Person
+  isCaptain: boolean
+end note
+
+ModelManager -right-> Person
 @enduml
