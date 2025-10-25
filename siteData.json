@@ -120,7 +120,7 @@
         "unassign-injury-from-player-unassigninjury": "Unassign injury from player: unassigninjury",
         "creating-a-new-position-addposition": "Creating a new position: addposition",
         "assigning-a-position-to-player-assignposition": "Assigning a position to player: assignposition",
-        "assigning-player-as-captain-makecaptain": "Assigning player as captain: makecaptain",
+        "assigning-player-as-captain-assigncaptain": "Assigning player as captain: assigncaptain",
         "unassigning-player-as-captain-stripcaptain": "Unassigning player as captain: stripcaptain",
         "listing-all-players-list": "Listing all players: list",
         "listing-all-teams-listteam": "Listing all teams: listteam",
