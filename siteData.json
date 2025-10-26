@@ -111,9 +111,11 @@
         "playbook-user-guide": "PlayBook User Guide",
         "introduction": "Introduction",
         "quick-start": "Quick start",
-        "features": "Features",
+        "command-reference": "Command Reference",
+        "command-format-conventions": "Command Format Conventions",
         "global-feature-behaviours": "Global Feature Behaviours",
         "field-requirements": "Field Requirements",
+        "features": "Features",
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
