@@ -13,52 +13,30 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-Class UniqueTagList
 Class UniqueTeamList
 Class UniquePositionList
-Class Injury
+Class Person
 Class Team
 Class Position
 }
 
 AddressBook .up.|> ReadOnlyAddressBook
-
 ModelManager ..|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -down-> AddressBook
-ModelManager -up->   UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *-right-> UniquePersonList
-AddressBook *-down-> UniqueTagList
-AddressBook *-left-> UniqueTeamList
-AddressBook *-up-> UniquePositionList
+ModelManager --> AddressBook
+ModelManager --> UserPrefs
 
-UniquePersonList -right-> Person
-UniqueTagList -down-> Tag
-UniqueTeamList -left-> Team
-UniquePositionList -up-> Position
+AddressBook --> UniquePersonList
+AddressBook --> UniqueTeamList
+AddressBook --> UniquePositionList
 
+UniquePersonList --> "*" Person
+UniqueTeamList --> "*" Team
+UniquePositionList --> "*" Position
 
-Person -down-> Name
-Person -right-> Phone
-Person -up->   Email
-Person -left-> Address
-Person -down->  Team
-Person -right-> Position
-Person -up->    Injury
-
-
-note right of Person
-  isCaptain: boolean
-end note
-
-ModelManager -right-> Person
+Person --> "0..1" Team
+Person --> "0..1" Position
 @enduml
