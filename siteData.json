@@ -63,7 +63,13 @@
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-player": "Deleting a player",
         "assigning-an-injury-status-to-a-player": "Assigning an injury status to a player",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-effort": "Appendix: Effort",
+        "difficulty-level": "Difficulty Level",
+        "challenges-faced": "Challenges Faced",
+        "effort-required": "Effort Required",
+        "achievements": "Achievements",
+        "reuse-and-adaptation": "Reuse and Adaptation"
       },
       "headingKeywords": {}
     },
