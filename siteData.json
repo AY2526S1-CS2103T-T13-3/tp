@@ -62,6 +62,7 @@
         "6-undo-redo-functionality": "6. Undo/Redo Functionality",
         "7-enhanced-delete-operation-to-support-bulk-deletion": "7. Enhanced Delete Operation to Support Bulk Deletion",
         "8-enhanced-add-command-to-support-optional-position-and-injury-assignment": "8. Enhanced Add Command to Support Optional Position and Injury Assignment",
+        "9-enhanced-filter-command-success-message": "9. Enhanced Filter Command Success Message",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
         "user-stories": "User stories",
