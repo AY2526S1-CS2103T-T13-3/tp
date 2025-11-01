@@ -78,6 +78,35 @@ public class AssignCaptainCommandTest {
     }
 
     @Test
+    public void execute_personAlreadyCaptain_throwsCommandException() {
+        Person person = new PersonBuilder().withCaptain(true).build();
+        Name name = person.getName();
+
+        ModelStub modelStub = new ModelStub() {
+            @Override
+            public Person getPersonByName(Name queryName) {
+                if (!queryName.equals(name)) {
+                    throw new PersonNotFoundException();
+                }
+                return person;
+            }
+        };
+
+        AssignCaptainCommand command = new AssignCaptainCommand(name);
+        try {
+            command.execute(modelStub);
+        } catch (CommandException e) {
+            String expected = String.format(AssignCaptainCommand.MESSAGE_ALREADY_CAPTAIN,
+                    person.getName(), person.getTeam().getName());
+            assertEquals(expected, e.getMessage());
+            return;
+        } catch (Exception e) {
+            throw new AssertionError("Expected CommandException for already captain.");
+        }
+        throw new AssertionError("Expected CommandException for already captain.");
+    }
+
+    @Test
     public void execute_teamAlreadyHasCaptain_stripsOldCaptainAndMakesNewCaptain() throws Exception {
         Person oldCaptain = new PersonBuilder().withName("Old Captain").withCaptain(true).build();
         Person newCaptain = new PersonBuilder().withName("New Captain").withCaptain(false).build();
