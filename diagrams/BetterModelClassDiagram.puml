@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam linetype polyline
+left to right direction
+
+Package Model as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class AddressBook
+Class ModelManager
+Class UserPrefs
+}
+
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+package "AddressBook Contents" as ABC <<Rectangle>> {
+  together {
+    class Person
+    class Tag
+    class Team
+    class Position
+    class Injury
+  }
+  together {
+    class Name
+    class Phone
+    class Email
+    class Address
+  }
+}
+
+Person -right-> "*" Tag
+
+Person *-down-> Name
+Person *-down-> Phone
+Person *-down-> Email
+Person *-down-> Address
+Person -right-> Team
+Person -right-> Position
+Person -right-> "*" Injury
+
+ModelManager --> "~* filtered" Person
+
+Class "Layout Guide" as ColGuide #FFFFFF
+ColGuide -[hidden]down- Person
+ColGuide -[hidden]right- Person
+Person -[hidden]right- Tag
+Tag -[hidden]down- Team
+Team -[hidden]down- Position
+Position -[hidden]down- Injury
+Person -[hidden]down- Name
+Name -[hidden]down- Phone
+Phone -[hidden]down- Email
+Email -[hidden]down- Address
+
+@enduml
